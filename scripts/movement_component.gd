@@ -18,10 +18,11 @@ func _move(speed: float, direction: float, dt: float):
 func walk(direction: float, dt: float):
 	_move(walk_speed, direction, dt)
 
+func stop():
+	_move(0.0, 0.0, 0.0)
 
 func run(direction: float, dt: float):
 	_move(run_speed, direction, dt)
-
 
 func jump() -> bool:
 	if target.is_on_floor():
@@ -30,13 +31,11 @@ func jump() -> bool:
 	
 	return false
 
-
 func _physics_process(delta: float) -> void:
 	if use_gravity and not target.is_on_floor():
 		target.velocity += target.get_gravity() * delta
 	
 	target.move_and_slide()
-
 
 func flip_to_direction(direction: float):
 	if direction > 0.0:

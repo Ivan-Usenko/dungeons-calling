@@ -22,7 +22,6 @@ var perform_next_attack: bool = false
 func _ready() -> void:
 	combo_attacks_count = get_child_count()
 
-
 func _process(delta: float) -> void:
 	# Decrease attack cooldown if one is set
 	if attack_cooldown > 0.0:
@@ -40,7 +39,6 @@ func _process(delta: float) -> void:
 		time_until_combo_reset -= delta
 		if time_until_combo_reset <= 0.0:
 			current_combo = 0
-
 
 func attack() -> void:
 	if attack_cooldown > 0.0 or current_combo >= combo_attacks_count:
@@ -64,11 +62,13 @@ func _on_attack_end() -> void:
 		perform_next_attack = false
 		attack()
 
-
 ## This callback function should be called from attack animation
 func _can_perform_next_attack() -> void:
 	can_perform_next_attack = true
 
-
 func is_attacking() -> bool:
 	return attacking
+
+## Return current amount attacks in a row
+func get_current_combo() -> int:
+	return current_combo

@@ -1,13 +1,11 @@
-[gd_scene load_steps=130 format=3 uid="uid://wuf4emb0cmvi"]
+[gd_scene load_steps=126 format=3 uid="uid://wuf4emb0cmvi"]
 
 [ext_resource type="PackedScene" uid="uid://d2c4736fgsaft" path="res://components/weapon_component.tscn" id="1_4r5pv"]
-[ext_resource type="Script" uid="uid://b0hpvq78bnc81" path="res://scenes/player.gd" id="1_31cv2"]
 [ext_resource type="Texture2D" uid="uid://bt4a5wey0rtuc" path="res://assets/sprites/Knight_1/Attack 1.png" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://de1278vh0ihlc" path="res://assets/sprites/Knight_1/Attack 2.png" id="2_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://cqhmt7sk6b7hd" path="res://assets/sprites/Knight_1/Run.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://d0e1q4tyehtus" path="res://assets/sprites/Knight_1/Idle.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://c58yonnd10sag" path="res://assets/sprites/Knight_1/Attack 3.png" id="3_jej6c"]
-[ext_resource type="PackedScene" uid="uid://08d6j08qnhar" path="res://components/armor_component.tscn" id="3_pf23h"]
 [ext_resource type="Texture2D" uid="uid://c68sd0q7x8cov" path="res://assets/sprites/Knight_1/Walk.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://cvrtwo8a7mhxu" path="res://assets/sprites/Knight_1/Dead.png" id="4_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://cnyk4dcev05pj" path="res://assets/sprites/Knight_1/Defend.png" id="5_oprun"]
@@ -27,7 +25,6 @@
 [ext_resource type="Script" uid="uid://va25h4nptpij" path="res://scripts/states/hurt_state.gd" id="23_4ni07"]
 [ext_resource type="Script" uid="uid://bxqm1mpb48xan" path="res://scripts/states/dead_state.gd" id="24_l71n6"]
 [ext_resource type="Script" uid="uid://n30ej55tiy64" path="res://scripts/states/player_protect_state.gd" id="25_ke2ow"]
-[ext_resource type="Script" uid="uid://ck54hhqt6bcds" path="res://scripts/states/defend_state.gd" id="26_ujl30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_qhqgy")
@@ -1137,9 +1134,6 @@ node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l71n6"]
 animation = &"Dead"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ujl30"]
-animation = &"Defend"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ni07"]
 animation = &"Hurt"
 
@@ -1183,8 +1177,6 @@ advance_mode = 2
 "states/Attack 3/position" = Vector2(658, 193)
 states/Dead/node = SubResource("AnimationNodeAnimation_l71n6")
 states/Dead/position = Vector2(485, 254)
-states/Defend/node = SubResource("AnimationNodeAnimation_ujl30")
-states/Defend/position = Vector2(782, 264)
 states/End/position = Vector2(968, 125)
 states/Hurt/node = SubResource("AnimationNodeAnimation_4ni07")
 states/Hurt/position = Vector2(381, 254)
@@ -1209,13 +1201,9 @@ radius = 16.0
 height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_31cv2")
 
 [node name="WeaponComponent" parent="." instance=ExtResource("1_4r5pv")]
 base_damage = 10.0
-
-[node name="ArmorComponent" parent="." instance=ExtResource("3_pf23h")]
-damage_reduction = 10.0
 
 [node name="DirectionDependend" type="Node2D" parent="."]
 
@@ -1267,11 +1255,10 @@ position = Vector2(24, -32)
 shape = SubResource("RectangleShape2D_fulsm")
 disabled = true
 
-[node name="HitboxComponent" parent="DirectionDependend" node_paths=PackedStringArray("health_component", "armor_component") instance=ExtResource("18_fulsm")]
+[node name="HitboxComponent" parent="DirectionDependend" node_paths=PackedStringArray("health_component") instance=ExtResource("18_fulsm")]
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
-armor_component = NodePath("../../ArmorComponent")
 
 [node name="HitboxShape" type="CollisionShape2D" parent="DirectionDependend/HitboxComponent"]
 position = Vector2(0, -32)
@@ -1349,8 +1336,3 @@ script = ExtResource("25_ke2ow")
 animation_tree = NodePath("../../AnimationTree")
 hitbox_component = NodePath("../../DirectionDependend/HitboxComponent")
 metadata/_custom_type_script = "uid://n30ej55tiy64"
-
-[node name="DefendState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree")]
-script = ExtResource("26_ujl30")
-animation_tree = NodePath("../../AnimationTree")
-metadata/_custom_type_script = "uid://ck54hhqt6bcds"
