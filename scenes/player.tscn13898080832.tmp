@@ -1,6 +1,7 @@
-[gd_scene load_steps=129 format=3 uid="uid://wuf4emb0cmvi"]
+[gd_scene load_steps=130 format=3 uid="uid://wuf4emb0cmvi"]
 
 [ext_resource type="PackedScene" uid="uid://d2c4736fgsaft" path="res://components/weapon_component.tscn" id="1_4r5pv"]
+[ext_resource type="Script" uid="uid://b0hpvq78bnc81" path="res://scenes/player.gd" id="1_31cv2"]
 [ext_resource type="Texture2D" uid="uid://bt4a5wey0rtuc" path="res://assets/sprites/Knight_1/Attack 1.png" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://de1278vh0ihlc" path="res://assets/sprites/Knight_1/Attack 2.png" id="2_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://cqhmt7sk6b7hd" path="res://assets/sprites/Knight_1/Run.png" id="2_dqkch"]
@@ -1208,6 +1209,7 @@ radius = 16.0
 height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_31cv2")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("wielder") instance=ExtResource("1_4r5pv")]
 wielder = NodePath("..")
@@ -1227,8 +1229,10 @@ autoplay = "Idle"
 [node name="StandingAttacks" parent="DirectionDependend" instance=ExtResource("13_oprun")]
 
 [node name="Attack" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+collision_layer = 2
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
+damage_multiplier = null
 
 [node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/Attack"]
 position = Vector2(40, -40)
@@ -1236,8 +1240,10 @@ shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 
 [node name="Attack2" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+collision_layer = 2
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
+damage_multiplier = null
 
 [node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/Attack2"]
 position = Vector2(32, -40)
@@ -1245,6 +1251,7 @@ shape = SubResource("CircleShape2D_qfm1y")
 disabled = true
 
 [node name="Attack3" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+collision_layer = 2
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 damage_multiplier = 1.5
@@ -1257,6 +1264,7 @@ disabled = true
 [node name="RunningAttacks" parent="DirectionDependend" instance=ExtResource("13_oprun")]
 
 [node name="Attack" parent="DirectionDependend/RunningAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+collision_layer = 2
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 damage_multiplier = 1.5

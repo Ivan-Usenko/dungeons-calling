@@ -14,7 +14,7 @@ func _ready() -> void:
 	health = max_health
 
 func damage(attack_damage: float) -> void:
-	if attack_damage < 0.0:
+	if attack_damage <= 0.0:
 		return
 	
 	health = max(health - attack_damage, 0.0)
@@ -24,7 +24,7 @@ func damage(attack_damage: float) -> void:
 		died.emit()
 
 func heal(healing: float) -> void:
-	if healing < 0.0:
+	if healing <= 0.0:
 		return
 	
 	if not dead:

@@ -1,9 +1,9 @@
-extends Area2D
+extends Node
 class_name Attack
 
-@export var weapon_component: WeaponComponent = null
-@export var damage_multiplier: float = 1.0
-
+var weapon: WeaponComponent
+var damage_multiplier: float
+var direction: float
 
 func get_damage() -> float:
-	return weapon_component.base_damage * damage_multiplier
+	return weapon.base_damage * damage_multiplier

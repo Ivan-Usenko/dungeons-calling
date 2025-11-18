@@ -6,9 +6,9 @@ class_name MovementComponent
 @export var walk_speed: float = 150.0
 @export var run_speed: float = 250.0
 @export var jump_velocity: float = 200.0
-
 @export var use_gravity: bool = true
 
+var facing_direction: float = 1.0
 
 func _move(speed: float, direction: float, dt: float):
 	if target.is_on_floor():
@@ -39,6 +39,9 @@ func _physics_process(delta: float) -> void:
 
 func flip_to_direction(direction: float):
 	if direction > 0.0:
-		direction_dependend.scale.x = 1.0
+		facing_direction = 1.0
+		direction_dependend.scale.x = facing_direction
+		
 	elif direction < 0.0:
-		direction_dependend.scale.x = -1.0
+		facing_direction = -1.0
+		direction_dependend.scale.x = facing_direction
