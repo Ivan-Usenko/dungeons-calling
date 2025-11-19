@@ -1191,7 +1191,7 @@ animation_tree = NodePath("../../AnimationTree")
 attack_component = NodePath("../../DirectionDependend/StandingAttacks")
 hitbox_component = NodePath("../../HitboxComponent")
 movement_component = NodePath("../../MovementComponent")
-number_of_blocks = 2
+block_cooldown = 3.0
 metadata/_custom_type_script = "uid://c7115uc11adre"
 
 [node name="DeadState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "movement_component")]

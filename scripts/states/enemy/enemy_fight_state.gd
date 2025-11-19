@@ -6,13 +6,10 @@ class_name EnemyFightState
 @export var attack_component: AttackComponent = null
 @export var movement_component: MovementComponent = null
 @export var hitbox_component: HitboxComponent = null
-@export var block_cooldown_time: float = 5.0
 
 var playback: AnimationNodeStateMachinePlayback = null
 var health_component: HealthComponent = null
 var damage_received: bool = false
-var combo_finished: bool = false
-var block_cooldown: float = 0.0
 
 func _ready() -> void:
 	playback = animation_tree.get("parameters/playback")
@@ -56,17 +53,10 @@ func physics_update(delta: float) -> void:
 	if to_target_dir != movement_component.facing_direction:
 		movement_component.flip_to_direction(to_target_dir)
 	
-	if block_cooldown > 0.0:
-		block_cooldown -= delta
-	
 	if not attack_component.get_attack_cooldown():
 		attack_component.attack()
 		if attack_component.is_attacking():
 			var combo = attack_component.get_current_combo()
 			playback.travel("Attack " + str(combo))
-	elif block_cooldown <= 0.0:
-		transition.emit(self, "EnemyProtectState")
-		block_cooldown = block_cooldown_time
-		return
 	else:
-		playback.travel("Idle")
+		transition.emit(self, "EnemyProtectState")
