@@ -17,7 +17,8 @@ var damage_received: bool = false
 
 func _ready() -> void:
 	playback = animation_tree.get("parameters/playback")
-	health_component = hitbox_component.health_component
+	if hitbox_component:
+		health_component = hitbox_component.health_component
 
 func _on_damage_received(damage: float) -> void:
 	damage_received = true
@@ -41,12 +42,14 @@ func update_animation() -> void:
 		playback.travel("Idle")
 
 func enter() -> void:
-	health_component.damage_received.connect(_on_damage_received)
+	if health_component:
+		health_component.damage_received.connect(_on_damage_received)
 	update_state()
 	update_animation()
 
 func exit() -> void:
-	health_component.damage_received.disconnect(_on_damage_received)
+	if health_component:
+		health_component.damage_received.disconnect(_on_damage_received)
 
 func update(_delta: float) -> void:
 	pass
@@ -55,7 +58,7 @@ func physics_update(delta: float) -> void:
 	update_state()
 	
 	# Handle death
-	if health_component.is_dead():
+	if health_component and health_component.is_dead():
 		transition.emit(self, "DeadState")
 		return
 	

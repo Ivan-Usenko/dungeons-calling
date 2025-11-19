@@ -1,5 +1,5 @@
 extends Node
-class_name StateMachine
+class_name FSM
 
 var states: Dictionary[String, State] = {}
 var current_state: State = null

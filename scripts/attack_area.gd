@@ -13,12 +13,13 @@ func _on_attack_hit(area: Area2D) -> void:
 	if area is not HitboxComponent:
 		return
 	
+	if not weapon_component:
+		return
+	
 	var hitbox: HitboxComponent = area
 	var attacker = weapon_component.wielder
 	var victim = hitbox.hitbox_owner
 	direction = sign((victim.position - attacker.position).x)
-	
-	print(victim.name, " received attack from ", attacker.name)
 	
 	var attack: Attack = Attack.new()
 	attack.weapon = weapon_component
@@ -27,12 +28,8 @@ func _on_attack_hit(area: Area2D) -> void:
 	hitbox.attack_received.emit(attack)
 	
 	var damage = attack.get_damage()
-	print("Attack damage before protection: ", damage)
 	if hitbox.armor_component:
 		damage = max(damage - hitbox.armor_component.damage_reduction, 0.0)
-	
-	
-	print("Attack damage after protection: ", damage)
 	
 	if not hitbox.health_component:
 		return

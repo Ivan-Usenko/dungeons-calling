@@ -1,6 +1,8 @@
 extends Node2D
 class_name AttackComponent
 
+signal combo_finished
+
 @export var combo_reset_time: float = 0.25
 @export var full_combo_attack_cooldown: float = 0.5
 
@@ -52,11 +54,14 @@ func attack() -> void:
 	attacking = true
 	current_combo += 1
 
- ## This callback function should be called from attack animation
+## This callback function should be called from attack animation
 func _on_attack_end() -> void:
 	can_perform_next_attack = false
 	attacking = false
 	time_until_combo_reset = combo_reset_time
+	
+	if current_combo == combo_attacks_count:
+		combo_finished.emit()
 	
 	if perform_next_attack:
 		perform_next_attack = false
@@ -72,3 +77,6 @@ func is_attacking() -> bool:
 ## Return current amount attacks in a row
 func get_current_combo() -> int:
 	return current_combo
+
+func get_attack_cooldown() -> float:
+	return max(attack_cooldown, 0.0)

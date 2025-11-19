@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://i5dndqefjh15"]
+[gd_scene load_steps=4 format=3 uid="uid://i5dndqefjh15"]
 
-[ext_resource type="PackedScene" uid="uid://wuf4emb0cmvi" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://crofw0tuqik7w" path="res://scenes/skeleton_warior.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://wuf4emb0cmvi" path="res://scenes/player.tscn" id="2_yqjtg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -9,9 +10,15 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
+
+[node name="SkeletonWarior" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_uwrxv")]
+position = Vector2(184, -72)
+target = NodePath("../Player")
+attack_distance = 70.0
+
+[node name="Player" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(-208, -48)

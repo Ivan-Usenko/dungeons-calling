@@ -29,6 +29,9 @@ func exit() -> void:
 	hitbox_component.attack_received.disconnect(_on_attack_received)
 
 func update(_delta: float) -> void:
+	pass
+
+func physics_update(_delta: float) -> void:
 	if health_component.is_dead():
 		transition.emit(self, "DeadState")
 	
@@ -41,6 +44,3 @@ func update(_delta: float) -> void:
 	
 	elif not Input.is_action_pressed("protect"):
 		transition.emit(self, "MoveState")
-
-func physics_update(_delta: float) -> void:
-	pass

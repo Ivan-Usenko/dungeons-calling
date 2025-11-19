@@ -1,5 +1,5 @@
 extends State
-class_name HurtState
+class_name PlayerHurtState
 
 @export var animation_tree: AnimationTree = null
 

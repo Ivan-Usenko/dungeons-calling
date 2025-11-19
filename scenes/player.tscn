@@ -1,6 +1,7 @@
-[gd_scene load_steps=129 format=3 uid="uid://wuf4emb0cmvi"]
+[gd_scene load_steps=130 format=3 uid="uid://wuf4emb0cmvi"]
 
 [ext_resource type="PackedScene" uid="uid://d2c4736fgsaft" path="res://components/weapon_component.tscn" id="1_4r5pv"]
+[ext_resource type="Script" uid="uid://xe0obcov3kfg" path="res://scripts/player.gd" id="1_pf23h"]
 [ext_resource type="Texture2D" uid="uid://bt4a5wey0rtuc" path="res://assets/sprites/Knight_1/Attack 1.png" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://de1278vh0ihlc" path="res://assets/sprites/Knight_1/Attack 2.png" id="2_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://cqhmt7sk6b7hd" path="res://assets/sprites/Knight_1/Run.png" id="2_dqkch"]
@@ -16,16 +17,16 @@
 [ext_resource type="Texture2D" uid="uid://bvnwure00353m" path="res://assets/sprites/Knight_1/Run+Attack.png" id="11_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://fptsrhxa2m2i" path="res://components/movement_component.tscn" id="13_f1ej7"]
 [ext_resource type="PackedScene" uid="uid://d1o0e2ysihsp0" path="res://components/attack_component.tscn" id="13_oprun"]
-[ext_resource type="PackedScene" uid="uid://b1apecisy6bqk" path="res://components/attack.tscn" id="14_a8ls1"]
+[ext_resource type="PackedScene" uid="uid://b1apecisy6bqk" path="res://components/attack_area.tscn" id="14_a8ls1"]
 [ext_resource type="PackedScene" uid="uid://rifpdh4fwkxr" path="res://components/health_component.tscn" id="17_qfm1y"]
 [ext_resource type="PackedScene" uid="uid://b1csbsw2741ca" path="res://components/hitbox_component.tscn" id="18_fulsm"]
-[ext_resource type="PackedScene" uid="uid://b5fptgdgycvs7" path="res://components/fsm.tscn" id="19_4r5pv"]
-[ext_resource type="Script" uid="uid://dj3ikc6bj0uct" path="res://scripts/states/player_move_state.gd" id="21_i4ail"]
-[ext_resource type="Script" uid="uid://do7jamrcs01mr" path="res://scripts/states/player_attack_state.gd" id="22_4ni07"]
+[ext_resource type="Script" uid="uid://cpfye0cyk2qyf" path="res://scripts/fsm.gd" id="20_60mlk"]
+[ext_resource type="Script" uid="uid://dj3ikc6bj0uct" path="res://scripts/states/player/player_move_state.gd" id="21_i4ail"]
+[ext_resource type="Script" uid="uid://do7jamrcs01mr" path="res://scripts/states/player/player_attack_state.gd" id="22_4ni07"]
 [ext_resource type="Script" uid="uid://c80ebbi2greq5" path="res://scripts/states/jump_state.gd" id="22_a38lo"]
-[ext_resource type="Script" uid="uid://va25h4nptpij" path="res://scripts/states/hurt_state.gd" id="23_4ni07"]
+[ext_resource type="Script" uid="uid://va25h4nptpij" path="res://scripts/states/player/player_hurt_state.gd" id="23_4ni07"]
 [ext_resource type="Script" uid="uid://bxqm1mpb48xan" path="res://scripts/states/dead_state.gd" id="24_l71n6"]
-[ext_resource type="Script" uid="uid://n30ej55tiy64" path="res://scripts/states/player_protect_state.gd" id="25_ke2ow"]
+[ext_resource type="Script" uid="uid://n30ej55tiy64" path="res://scripts/states/player/player_protect_state.gd" id="25_ke2ow"]
 [ext_resource type="Script" uid="uid://ck54hhqt6bcds" path="res://scripts/states/defend_state.gd" id="26_ujl30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
@@ -556,7 +557,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DirectionDependend/StandingAttacks/Attack/AttackShape:disabled")
+tracks/3/path = NodePath("DirectionDependend/StandingAttacks/AttackArea/AttackShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -572,7 +573,7 @@ tracks/4/path = NodePath("DirectionDependend/StandingAttacks")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4, 0.5),
+"times": PackedFloat32Array(0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -614,7 +615,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DirectionDependend/StandingAttacks/Attack2/AttackShape:disabled")
+tracks/2/path = NodePath("DirectionDependend/StandingAttacks/AttackArea2/AttackShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -630,7 +631,7 @@ tracks/3/path = NodePath("DirectionDependend/StandingAttacks")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.6, 0.8),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -672,7 +673,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DirectionDependend/StandingAttacks/Attack3/AttackShape:disabled")
+tracks/2/path = NodePath("DirectionDependend/StandingAttacks/AttackArea3/AttackShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -688,7 +689,7 @@ tracks/3/path = NodePath("DirectionDependend/StandingAttacks")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.6, 0.8),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -697,6 +698,64 @@ tracks/3/keys = {
 "args": [],
 "method": &"_on_attack_end"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_l71n6"]
+resource_name = "Dead"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Dead"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_ke2ow"]
+resource_name = "Defend"
+length = 0.33334
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Defend"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_4ni07"]
@@ -786,6 +845,35 @@ tracks/1/keys = {
 "values": [2]
 }
 
+[sub_resource type="Animation" id="Animation_ujl30"]
+resource_name = "Protect"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Protect"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_a8ls1"]
 length = 0.001
 tracks/0/type = "value"
@@ -827,7 +915,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DirectionDependend/StandingAttacks/Attack/AttackShape:disabled")
+tracks/3/path = NodePath("DirectionDependend/StandingAttacks/AttackArea/AttackShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -839,7 +927,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DirectionDependend/StandingAttacks/Attack2/AttackShape:disabled")
+tracks/4/path = NodePath("DirectionDependend/StandingAttacks/AttackArea2/AttackShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -851,7 +939,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("DirectionDependend/StandingAttacks/Attack3/AttackShape:disabled")
+tracks/5/path = NodePath("DirectionDependend/StandingAttacks/AttackArea3/AttackShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -863,7 +951,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("DirectionDependend/RunningAttacks/Attack/AttackShape:disabled")
+tracks/6/path = NodePath("DirectionDependend/RunningAttacks/AttackArea/AttackShape:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -933,7 +1021,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DirectionDependend/RunningAttacks/Attack/AttackShape:disabled")
+tracks/2/path = NodePath("DirectionDependend/RunningAttacks/AttackArea/AttackShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -949,7 +1037,7 @@ tracks/3/path = NodePath("DirectionDependend/RunningAttacks")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.666667, 1),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -988,93 +1076,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_l71n6"]
-resource_name = "Dead"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Dead"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_ke2ow"]
-resource_name = "Defend"
-length = 0.33334
-step = 0.0666667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Defend"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="Animation" id="Animation_ujl30"]
-resource_name = "Protect"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionDependend/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Protect"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qfm1y"]
@@ -1203,11 +1204,10 @@ states/Walk/position = Vector2(381, 156)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qfm1y")]
 graph_offset = Vector2(15, 19)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v2ag"]
-radius = 16.0
-height = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_pf23h"]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_pf23h")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("wielder") instance=ExtResource("1_4r5pv")]
 wielder = NodePath("..")
@@ -1226,47 +1226,48 @@ autoplay = "Idle"
 
 [node name="StandingAttacks" parent="DirectionDependend" instance=ExtResource("13_oprun")]
 
-[node name="Attack" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+[node name="AttackArea" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 
-[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/Attack"]
+[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/AttackArea"]
 position = Vector2(40, -40)
 shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 
-[node name="Attack2" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+[node name="AttackArea2" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 
-[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/Attack2"]
+[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/AttackArea2"]
 position = Vector2(32, -40)
 shape = SubResource("CircleShape2D_qfm1y")
 disabled = true
 
-[node name="Attack3" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+[node name="AttackArea3" parent="DirectionDependend/StandingAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 damage_multiplier = 1.5
 
-[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/Attack3"]
+[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/StandingAttacks/AttackArea3"]
 position = Vector2(59, -32)
 shape = SubResource("RectangleShape2D_a8ls1")
 disabled = true
 
 [node name="RunningAttacks" parent="DirectionDependend" instance=ExtResource("13_oprun")]
 
-[node name="Attack" parent="DirectionDependend/RunningAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
+[node name="AttackArea" parent="DirectionDependend/RunningAttacks" node_paths=PackedStringArray("weapon_component") instance=ExtResource("14_a8ls1")]
 collision_mask = 16
 weapon_component = NodePath("../../../WeaponComponent")
 damage_multiplier = 1.5
 
-[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/RunningAttacks/Attack"]
+[node name="AttackShape" type="CollisionShape2D" parent="DirectionDependend/RunningAttacks/AttackArea"]
 position = Vector2(24, -32)
 shape = SubResource("RectangleShape2D_fulsm")
 disabled = true
 
 [node name="HitboxComponent" parent="DirectionDependend" node_paths=PackedStringArray("hitbox_owner", "health_component", "armor_component") instance=ExtResource("18_fulsm")]
+visible = false
 collision_layer = 4
 hitbox_owner = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
@@ -1290,9 +1291,9 @@ anim_player = NodePath("../AnimationPlayer")
 "parameters/Attack 3/TimeScale/scale" = 1.5
 "parameters/RunAttack 1/TimeScale/scale" = 1.5
 
-[node name="PhysicsCollsionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_3v2ag")
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_pf23h")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("target", "direction_dependend") instance=ExtResource("13_f1ej7")]
 target = NodePath("..")
@@ -1301,8 +1302,10 @@ jump_velocity = 250.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("17_qfm1y")]
 
-[node name="FSM" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("19_4r5pv")]
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("20_60mlk")
 initial_state = NodePath("MoveState")
+metadata/_custom_type_script = "uid://cpfye0cyk2qyf"
 
 [node name="MoveState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "movement_component", "hitbox_component")]
 script = ExtResource("21_i4ail")
@@ -1337,12 +1340,6 @@ script = ExtResource("23_4ni07")
 animation_tree = NodePath("../../AnimationTree")
 metadata/_custom_type_script = "uid://va25h4nptpij"
 
-[node name="DeadState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "movement_component")]
-script = ExtResource("24_l71n6")
-animation_tree = NodePath("../../AnimationTree")
-movement_component = NodePath("../../MovementComponent")
-metadata/_custom_type_script = "uid://bxqm1mpb48xan"
-
 [node name="ProtectState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "hitbox_component", "movement_component")]
 script = ExtResource("25_ke2ow")
 animation_tree = NodePath("../../AnimationTree")
@@ -1354,3 +1351,9 @@ metadata/_custom_type_script = "uid://n30ej55tiy64"
 script = ExtResource("26_ujl30")
 animation_tree = NodePath("../../AnimationTree")
 metadata/_custom_type_script = "uid://ck54hhqt6bcds"
+
+[node name="DeadState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "movement_component")]
+script = ExtResource("24_l71n6")
+animation_tree = NodePath("../../AnimationTree")
+movement_component = NodePath("../../MovementComponent")
+metadata/_custom_type_script = "uid://bxqm1mpb48xan"
