@@ -1267,8 +1267,8 @@ shape = SubResource("RectangleShape2D_fulsm")
 disabled = true
 
 [node name="HitboxComponent" parent="DirectionDependend" node_paths=PackedStringArray("hitbox_owner", "health_component", "armor_component") instance=ExtResource("18_fulsm")]
-visible = false
 collision_layer = 4
+collision_mask = 32
 hitbox_owner = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 armor_component = NodePath("../../ArmorComponent")

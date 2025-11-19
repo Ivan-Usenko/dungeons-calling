@@ -449,6 +449,10 @@ size = Vector2(34, 56)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8klt"]
 size = Vector2(34, 18)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7cnd"]
+radius = 16.0
+height = 64.0
+
 [sub_resource type="Animation" id="Animation_8jq3u"]
 resource_name = "Attack 1"
 step = 0.2
@@ -622,7 +626,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_i7j8q"]
 resource_name = "Dead"
-step = 0.25
+length = 0.500013
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -642,7 +647,7 @@ tracks/1/path = NodePath("DirectionDependend/AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -1040,10 +1045,6 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_10m2d"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7cnd"]
-radius = 16.0
-height = 64.0
-
 [node name="SkeletonWarior" type="CharacterBody2D"]
 script = ExtResource("1_embwt")
 
@@ -1102,6 +1103,16 @@ position = Vector2(47, -25)
 shape = SubResource("RectangleShape2D_m8klt")
 disabled = true
 
+[node name="HitboxComponent" parent="DirectionDependend" node_paths=PackedStringArray("hitbox_owner", "health_component", "armor_component") instance=ExtResource("17_u22gk")]
+collision_layer = 16
+hitbox_owner = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
+armor_component = NodePath("../../ArmorComponent")
+
+[node name="HitboxShape" type="CollisionShape2D" parent="DirectionDependend/HitboxComponent"]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_q7cnd")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_j8l6b")
@@ -1127,17 +1138,6 @@ run_speed = 150.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("16_embwt")]
 max_health = 50.0
-
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("hitbox_owner", "health_component", "armor_component") instance=ExtResource("17_u22gk")]
-visible = false
-collision_layer = 16
-hitbox_owner = NodePath("..")
-health_component = NodePath("../HealthComponent")
-armor_component = NodePath("../ArmorComponent")
-
-[node name="HitboxShape" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_q7cnd")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("11_c3bcs")
@@ -1165,7 +1165,7 @@ enemy = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 attack_component = NodePath("../../DirectionDependend/StandingAttacks")
 movement_component = NodePath("../../MovementComponent")
-hitbox_component = NodePath("../../HitboxComponent")
+hitbox_component = NodePath("../../DirectionDependend/HitboxComponent")
 metadata/_custom_type_script = "uid://jr2s6gg4et3s"
 
 [node name="EnemyRunAttackState" type="Node" parent="FSM" node_paths=PackedStringArray("enemy", "animation_tree", "attack_component", "movement_component", "health_component")]
@@ -1189,7 +1189,7 @@ script = ExtResource("25_blm8j")
 enemy = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 attack_component = NodePath("../../DirectionDependend/StandingAttacks")
-hitbox_component = NodePath("../../HitboxComponent")
+hitbox_component = NodePath("../../DirectionDependend/HitboxComponent")
 movement_component = NodePath("../../MovementComponent")
 block_cooldown = 3.0
 metadata/_custom_type_script = "uid://c7115uc11adre"
