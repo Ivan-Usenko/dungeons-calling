@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvx2snqive7vu"]
+
+[ext_resource type="Script" uid="uid://5e7npd0t2io5" path="res://scripts/footstep_sound_manager.gd" id="1_qb7cs"]
+
+[node name="FootstepSoundManager" type="Node"]
+script = ExtResource("1_qb7cs")

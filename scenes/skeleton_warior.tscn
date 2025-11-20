@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://crofw0tuqik7w"]
+[gd_scene load_steps=124 format=3 uid="uid://crofw0tuqik7w"]
 
 [ext_resource type="Texture2D" uid="uid://bh3negywtbxti" path="res://assets/sprites/Skeleton_Warrior/Attack_1.png" id="1_1dkxt"]
 [ext_resource type="Script" uid="uid://0yhgvueck36p" path="res://scripts/enemy.gd" id="1_embwt"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dvmm8ly6hu14" path="res://assets/sprites/Skeleton_Warrior/Attack_3.png" id="3_den7u"]
 [ext_resource type="Texture2D" uid="uid://c5tpqsaec2lht" path="res://assets/sprites/Skeleton_Warrior/Walk.png" id="3_fk01n"]
 [ext_resource type="Texture2D" uid="uid://cnxtarao1544u" path="res://assets/sprites/Skeleton_Warrior/Dead.png" id="4_c3bcs"]
+[ext_resource type="Shader" uid="uid://dpptvjg6xig8h" path="res://shaders/hurt.gdshader" id="4_m1st3"]
 [ext_resource type="Texture2D" uid="uid://b2gg3pi8f3a3r" path="res://assets/sprites/Skeleton_Warrior/Hurt.png" id="5_j8l6b"]
 [ext_resource type="Texture2D" uid="uid://bwqh50ixmm66h" path="res://assets/sprites/Skeleton_Warrior/Protect.png" id="7_den7u"]
 [ext_resource type="Texture2D" uid="uid://cdp5rb4xbv5fa" path="res://assets/sprites/Skeleton_Warrior/Run+attack.png" id="9_c3bcs"]
@@ -19,13 +20,20 @@
 [ext_resource type="PackedScene" uid="uid://fptsrhxa2m2i" path="res://components/movement_component.tscn" id="15_h8p2a"]
 [ext_resource type="PackedScene" uid="uid://rifpdh4fwkxr" path="res://components/health_component.tscn" id="16_embwt"]
 [ext_resource type="PackedScene" uid="uid://b1csbsw2741ca" path="res://components/hitbox_component.tscn" id="17_u22gk"]
-[ext_resource type="Script" uid="uid://bxqm1mpb48xan" path="res://scripts/states/dead_state.gd" id="18_10m2d"]
 [ext_resource type="Script" uid="uid://dffi1pul3grb3" path="res://scripts/states/enemy/enemy_idle_state.gd" id="20_embwt"]
+[ext_resource type="Texture2D" uid="uid://boopvog2rqohe" path="res://assets/textures/enemy_health_bar/enemy_health_bar_background.png" id="20_pyyva"]
+[ext_resource type="Texture2D" uid="uid://c84l8tnu5g3ut" path="res://assets/textures/enemy_health_bar/enemy_health_bar.png" id="21_1oy8g"]
 [ext_resource type="Script" uid="uid://cgx31asrc3un6" path="res://scripts/states/enemy/enemy_chase_state.gd" id="21_u22gk"]
 [ext_resource type="Script" uid="uid://jr2s6gg4et3s" path="res://scripts/states/enemy/enemy_fight_state.gd" id="22_10m2d"]
 [ext_resource type="Script" uid="uid://niy24os5yfor" path="res://scripts/states/enemy/enemy_run_attack_state.gd" id="23_7j5e8"]
 [ext_resource type="Script" uid="uid://c7lmd5vcp3l2k" path="res://scripts/states/enemy/enemy_hurt_state.gd" id="23_10m2d"]
 [ext_resource type="Script" uid="uid://c7115uc11adre" path="res://scripts/states/enemy/enemy_protect_state.gd" id="25_blm8j"]
+[ext_resource type="Script" uid="uid://027jiqnmrmuu" path="res://scripts/states/enemy/enemy_dead_state.gd" id="26_blm8j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfv3o"]
+shader = ExtResource("4_m1st3")
+shader_parameter/tint_color = Color(1, 0, 0, 1)
+shader_parameter/tint_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10m2d"]
 atlas = ExtResource("1_1dkxt")
@@ -656,7 +664,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_7s5di"]
 resource_name = "Hurt"
 length = 0.2
-step = 0.1
+step = 0.033
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1045,7 +1053,46 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_10m2d"]
 
+[sub_resource type="Animation" id="Animation_m1st3"]
+resource_name = "HurtTint"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yfv3o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pyyva"]
+_data = {
+&"HurtTint": SubResource("Animation_m1st3"),
+&"RESET": SubResource("Animation_yfv3o")
+}
+
 [node name="SkeletonWarior" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_embwt")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("wielder") instance=ExtResource("1_q7cnd")]
@@ -1058,6 +1105,7 @@ damage_reduction = 5.0
 [node name="DirectionDependend" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionDependend"]
+material = SubResource("ShaderMaterial_yfv3o")
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_ul8p4")
 animation = &"Idle"
@@ -1126,7 +1174,7 @@ anim_player = NodePath("../AnimationPlayer")
 "parameters/Attack 3/TimeScale/scale" = 1.5
 "parameters/RunAttack 1/TimeScale/scale" = 1.5
 
-[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_10m2d")
 
@@ -1138,6 +1186,22 @@ run_speed = 150.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("16_embwt")]
 max_health = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HealthComponent"]
+root_node = NodePath("../../DirectionDependend")
+libraries = {
+&"": SubResource("AnimationLibrary_pyyva")
+}
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -12.0
+offset_top = -67.0
+offset_right = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource("20_pyyva")
+texture_progress = ExtResource("21_1oy8g")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("11_c3bcs")
@@ -1194,8 +1258,9 @@ movement_component = NodePath("../../MovementComponent")
 block_cooldown = 3.0
 metadata/_custom_type_script = "uid://c7115uc11adre"
 
-[node name="DeadState" type="Node" parent="FSM" node_paths=PackedStringArray("animation_tree", "movement_component")]
-script = ExtResource("18_10m2d")
+[node name="EnemyDeadState" type="Node" parent="FSM" node_paths=PackedStringArray("enemy", "animation_tree", "movement_component")]
+script = ExtResource("26_blm8j")
+enemy = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 movement_component = NodePath("../../MovementComponent")
-metadata/_custom_type_script = "uid://bxqm1mpb48xan"
+metadata/_custom_type_script = "uid://027jiqnmrmuu"

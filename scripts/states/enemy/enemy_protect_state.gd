@@ -49,7 +49,7 @@ func exit() -> void:
 
 func update(_delta: float) -> void:
 	if health_component.is_dead():
-		transition.emit(self, "DeadState")
+		transition.emit(self, "EnemyDeadState")
 		return
 	
 	if attack_received:

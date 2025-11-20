@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://buey5xndgywsy"]
+
+[ext_resource type="Texture2D" uid="uid://dooqktpkueghi" path="res://assets/sprites/Items/door_key.png" id="1_0rmhr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rmhr"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_0rmhr"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, -3), Vector2(1, -9), Vector2(1, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_si2ci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jw4ut"]
+_data = {
+&"Idle": SubResource("Animation_0rmhr"),
+&"RESET": SubResource("Animation_si2ci")
+}
+
+[node name="DoorKey" type="Area2D" groups=["door_keys"]]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0rmhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -3)
+scale = Vector2(2, 2)
+texture = ExtResource("1_0rmhr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jw4ut")
+}
+autoplay = "Idle"

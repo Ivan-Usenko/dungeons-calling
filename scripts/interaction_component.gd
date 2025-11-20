@@ -1,0 +1,22 @@
+extends Area2D
+class_name InterractionComponent
+
+@export var inventory: InventoryComponent = null
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
+
+func _on_area_entered(area: Area2D) -> void:
+	_on_body_entered(area)
+
+func _on_body_entered(body: Node2D):
+	var owner_pos = inventory.inventory_owner.global_position
+	if body.is_in_group("door_keys"):
+		SfxManager.play_effect(owner_pos, "pickup_key")
+		inventory.add_item("door_key")
+		body.queue_free()
+	elif body.is_in_group("level_exit"):
+		SfxManager.play_effect(owner_pos, "open_door")
+		if inventory.count("door_key"):
+			GameManager.load_next_level()

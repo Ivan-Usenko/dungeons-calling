@@ -7,6 +7,8 @@ class_name Enemy
 @export var min_distance_for_run_attack: float = 250.0
 @export var start_run_attack_distance: float = 150.0
 
+@export var enable_enemy_run_attack: bool = false
+
 func distance_to_target() -> float:
 	return abs(target.position.x - position.x)
 

@@ -36,7 +36,7 @@ func physics_update(delta: float) -> void:
 	
 	# Handle death
 	if health_component and health_component.is_dead():
-		transition.emit(self, "DeadState")
+		transition.emit(self, "EnemyDeadState")
 		return
 	
 	# Handle hurt
@@ -47,7 +47,8 @@ func physics_update(delta: float) -> void:
 		return
 	
 	if start_chase_distance >= enemy.min_distance_for_run_attack and\
-	 distance_to_target <= enemy.start_run_attack_distance:
+	 distance_to_target <= enemy.start_run_attack_distance and\
+	 enemy.enable_enemy_run_attack:
 		transition.emit(self, "EnemyRunAttackState")
 		return
 	elif distance_to_target <= enemy.attack_distance:

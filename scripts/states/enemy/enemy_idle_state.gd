@@ -29,7 +29,7 @@ func update(_delta: float) -> void:
 func physics_update(delta: float) -> void:
 	# Handle death
 	if health_component and health_component.is_dead():
-		transition.emit(self, "DeadState")
+		transition.emit(self, "EnemyDeadState")
 		return
 	
 	# Handle hurt
