@@ -26,11 +26,11 @@
 [ext_resource type="Script" uid="uid://cpfye0cyk2qyf" path="res://scripts/fsm.gd" id="20_60mlk"]
 [ext_resource type="Script" uid="uid://dj3ikc6bj0uct" path="res://scripts/states/player/player_move_state.gd" id="21_i4ail"]
 [ext_resource type="Script" uid="uid://do7jamrcs01mr" path="res://scripts/states/player/player_attack_state.gd" id="22_4ni07"]
-[ext_resource type="Script" uid="uid://c80ebbi2greq5" path="res://scripts/states/jump_state.gd" id="22_a38lo"]
+[ext_resource type="Script" uid="uid://c80ebbi2greq5" path="res://scripts/states/player/player_jump_state.gd" id="22_a38lo"]
 [ext_resource type="Script" uid="uid://va25h4nptpij" path="res://scripts/states/player/player_hurt_state.gd" id="23_4ni07"]
 [ext_resource type="Script" uid="uid://bxqm1mpb48xan" path="res://scripts/states/player/player_dead_state.gd" id="24_l71n6"]
 [ext_resource type="Script" uid="uid://n30ej55tiy64" path="res://scripts/states/player/player_protect_state.gd" id="25_ke2ow"]
-[ext_resource type="Script" uid="uid://ck54hhqt6bcds" path="res://scripts/states/defend_state.gd" id="26_ujl30"]
+[ext_resource type="Script" uid="uid://ck54hhqt6bcds" path="res://scripts/states/player/player_defend_state.gd" id="26_ujl30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl8cc"]
 shader = ExtResource("4_wnwbv")

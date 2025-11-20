@@ -17,6 +17,6 @@ func _on_body_entered(body: Node2D):
 		inventory.add_item("door_key")
 		body.queue_free()
 	elif body.is_in_group("level_exit"):
-		SfxManager.play_effect(owner_pos, "open_door")
 		if inventory.count("door_key"):
+			SfxManager.play_effect(owner_pos, "open_door")
 			GameManager.load_next_level()

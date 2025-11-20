@@ -42,7 +42,10 @@ func _on_attack_received(attack: Attack):
 func enter() -> void:
 	update_block_cooldown()
 	hitbox_component.attack_received.connect(_on_attack_received)
-	playback.travel("Idle")
+	if blocked_count >= number_of_blocks:
+		playback.travel("Idle")
+	else:
+		playback.travel("Protect")
 
 func exit() -> void:
 	hitbox_component.attack_received.disconnect(_on_attack_received)
@@ -54,13 +57,14 @@ func update(_delta: float) -> void:
 	
 	if attack_received:
 		attack_received = false
-		if not attack_blocked:
+		if attack_blocked:
+			transition.emit(self, "EnemyDefendState")
+		else:
 			transition.emit(self, "EnemyHurtState")
-			return
+		return
 	
 	update_block_cooldown()
 	
-	var distance_to_target = enemy.distance_to_target()
 	var max_bloks_reached = blocked_count >= number_of_blocks
 	var to_target_dir = enemy.direction_to_target()
 	

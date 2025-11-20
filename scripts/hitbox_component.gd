@@ -8,6 +8,7 @@ signal attack_received
 @export var armor_component: ArmorComponent = null
 
 func _on_hitbox_entered(body: Node2D):
+	# Currently this function only handles traps
 	if health_component:
 		health_component.damage(health_component.get_health())
 

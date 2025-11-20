@@ -1,5 +1,5 @@
 extends State
-class_name DefendState
+class_name PlayerDefendState
 
 @export var animation_tree: AnimationTree = null
 

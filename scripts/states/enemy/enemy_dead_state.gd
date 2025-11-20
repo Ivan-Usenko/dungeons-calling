@@ -17,6 +17,8 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		enemy.collision_mask = 1
 
 func enter() -> void:
+	if not movement_component.target.is_on_floor():
+		await movement_component.landed
 	movement_component.stop()
 	playback.travel("Dead")
 	animation_tree.animation_finished.connect(_on_animation_finished)
