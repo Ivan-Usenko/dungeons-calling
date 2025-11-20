@@ -22,6 +22,7 @@ GameManager="*res://scenes/game_manager.tscn"
 TransitionScreen="*res://hud/transition_screen.tscn"
 FootstepSoundManager="*res://scenes/footstep_sound_manager.tscn"
 SfxManager="*res://scenes/sfx_manager.tscn"
+HudManager="*res://scenes/hud_manager.tscn"
 
 [global_group]
 

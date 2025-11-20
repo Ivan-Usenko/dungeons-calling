@@ -856,7 +856,7 @@ position = Vector2(0, -116)
 zoom = Vector2(2, 2)
 
 [node name="DoorKey" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(-152, -153)
+position = Vector2(-150, -147)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_iywne")

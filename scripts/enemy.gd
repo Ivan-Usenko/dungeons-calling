@@ -18,7 +18,8 @@ func _ready() -> void:
 func _on_landing() -> void: 
 	FootstepSoundManager.play_landing(global_position + Vector2(0.0, 8.0))
 
-func _on_damage_received(_damage: float) -> void:
+func _on_damage_received(damage: float) -> void:
+	HudManager.float_text(global_position - Vector2(0.0, 32.0), str(damage), Color.RED)
 	SfxManager.play_effect(global_position, "damage_bones")
 	SfxManager.play_effect(global_position, "hurt_skeleton")
 

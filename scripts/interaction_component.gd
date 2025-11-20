@@ -14,6 +14,7 @@ func _on_body_entered(body: Node2D):
 	var owner_pos = inventory.inventory_owner.global_position
 	if body.is_in_group("door_keys"):
 		SfxManager.play_effect(owner_pos, "pickup_key")
+		HudManager.float_text(owner_pos - Vector2(0.0, 80.0), "Door key collected", Color.YELLOW)
 		inventory.add_item("door_key")
 		body.queue_free()
 	elif body.is_in_group("level_exit"):
