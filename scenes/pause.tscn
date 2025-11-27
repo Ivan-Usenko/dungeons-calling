@@ -1,0 +1,121 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtburgnjp77wo"]
+
+[ext_resource type="FontFile" uid="uid://byt0jhijnspnw" path="res://assets/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf" id="1_f1d2v"]
+[ext_resource type="Script" uid="uid://23v1trjnwrw8" path="res://scripts/pause.gd" id="1_r8yp4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8yp4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0klm"]
+bg_color = Color(0.112116, 0.310804, 0.675931, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aicil"]
+bg_color = Color(0.0364959, 0.150419, 0.359653, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn4bt"]
+bg_color = Color(0.063623, 0.210711, 0.48077, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[node name="Pause" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_r8yp4")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainButton" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -170.0
+offset_right = 216.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="MainButton"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r8yp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0klm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aicil")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jn4bt")
+text = "Continue"
+
+[node name="Button2" type="Button" parent="MainButton"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r8yp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0klm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aicil")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jn4bt")
+text = "Settings"
+
+[node name="Button3" type="Button" parent="MainButton"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r8yp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0klm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aicil")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jn4bt")
+text = "Exit menu
+"
+
+[node name="Button4" type="Button" parent="MainButton"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r8yp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0klm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aicil")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jn4bt")
+text = "Exit game
+"
+
+[connection signal="pressed" from="MainButton/Button" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MainButton/Button2" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButton/Button3" to="." method="_on_exit_menu_pressed"]
+[connection signal="pressed" from="MainButton/Button4" to="." method="_on_exit_game_pressed"]
