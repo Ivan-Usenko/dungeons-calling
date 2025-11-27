@@ -51,6 +51,7 @@ const sfx = {
 
 func play_effect(position: Vector2, name: String):
 	var audio_player = AudioStreamPlayer2D.new()
+	audio_player.bus = AudioServer.get_bus_name(AudioServer.get_bus_index("SFX"))
 	if sfx.has(name):
 		audio_player.stream = sfx[name].pick_random()
 		get_tree().root.add_child(audio_player)
