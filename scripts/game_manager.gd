@@ -13,7 +13,8 @@ func load_next_level() -> void:
 	restart_on_death()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	var current_scene_name = get_tree().current_scene.name
+	if event.is_action_pressed("pause") and current_scene_name != "MainMenu":
 		toggle_pause()
 
 func toggle_pause() -> void:
