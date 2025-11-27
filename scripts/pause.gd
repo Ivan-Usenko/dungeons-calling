@@ -4,6 +4,10 @@ const SETTINGS_SCENE = preload("res://scenes/settings.tscn")
 
 @onready var main_button: VBoxContainer = $MainButton
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		_on_continue_pressed()
+
 func _on_continue_pressed() -> void:
 	get_tree().paused = false
 	queue_free()
