@@ -51,6 +51,7 @@ func _play_action(position: Vector2, collection) -> void:
 		
 		if footstep_sounds.has(tile_type):
 			var audio_player = AudioStreamPlayer2D.new()
+			audio_player.bus = AudioServer.get_bus_name(AudioServer.get_bus_index("SFX"))
 			audio_player.stream = collection[tile_type].pick_random()
 			get_tree().root.add_child(audio_player)
 			audio_player.global_position = position

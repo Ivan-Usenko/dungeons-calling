@@ -1,0 +1,249 @@
+[gd_scene load_steps=16 format=3 uid="uid://b4a17dxe7sej6"]
+
+[ext_resource type="FontFile" uid="uid://byt0jhijnspnw" path="res://assets/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf" id="1_5p8wc"]
+[ext_resource type="Script" uid="uid://dhegl4gddwjbq" path="res://scripts/settings.gd" id="1_r6d6q"]
+[ext_resource type="Script" uid="uid://dcjqqlse2jm4g" path="res://scripts/total_control.gd" id="3_6wm04"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_6wm04"]
+color = Color(0.0627451, 0.211765, 0.482353, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_r6d6q"]
+color = Color(0.353124, 0.56619, 0.954379, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f4mfi"]
+color = Color(0.353124, 0.56619, 0.954379, 1)
+thickness = 5
+
+[sub_resource type="Theme" id="Theme_6wm04"]
+default_font = ExtResource("1_5p8wc")
+default_font_size = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wm04"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gis3k"]
+content_margin_left = 5.0
+bg_color = Color(0.113725, 0.309804, 0.67451, 0.72549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83j8s"]
+content_margin_left = 5.0
+bg_color = Color(0.0627451, 0.211765, 0.482353, 0.529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjs24"]
+content_margin_left = 5.0
+bg_color = Color(0.0627451, 0.211765, 0.482353, 0.529412)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6d6q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wm04"]
+bg_color = Color(0.112116, 0.310804, 0.675931, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4mfi"]
+bg_color = Color(0.0364959, 0.150419, 0.359653, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_es4n0"]
+bg_color = Color(0.063623, 0.210711, 0.48077, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r6d6q")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -283.0
+offset_right = 152.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 70
+text = "Settings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -180.5
+offset_right = 179.5
+offset_bottom = 180.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+text = "Total volume"
+
+[node name="TotalControl" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_6wm04")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_r6d6q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f4mfi")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_6wm04")
+audio_bus_name = "Master"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+text = "Music volume"
+
+[node name="TotalControl2" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_6wm04")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_r6d6q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f4mfi")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_6wm04")
+audio_bus_name = "Ambience"
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+text = "Effects volume"
+
+[node name="TotalControl3" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_6wm04")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_r6d6q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f4mfi")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_6wm04")
+audio_bus_name = "SFX"
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+text = "Display"
+
+[node name="DisplayButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_6wm04")
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6wm04")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gis3k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_83j8s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gjs24")
+theme_override_constants/arrow_margin = 8
+selected = 0
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless Window"
+popup/item_2/id = 2
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+text = "Resolution"
+
+[node name="ResolutionButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_6wm04")
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6wm04")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gis3k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_83j8s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gjs24")
+theme_override_constants/arrow_margin = 8
+selected = 2
+item_count = 6
+popup/item_0/text = "1920 x 1080"
+popup/item_0/id = 0
+popup/item_1/text = "1366 x 768"
+popup/item_1/id = 1
+popup/item_2/text = "1280 x 720"
+popup/item_2/id = 2
+popup/item_3/text = "1680 x 1050"
+popup/item_3/id = 3
+popup/item_4/text = "2560 x 1440"
+popup/item_4/id = 4
+popup/item_5/text = "3840 x 2160"
+popup/item_5/id = 5
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = 204.0
+offset_right = 120.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r6d6q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6wm04")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4mfi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_es4n0")
+text = "Back"
+
+[connection signal="value_changed" from="VBoxContainer/TotalControl" to="VBoxContainer/TotalControl" method="_on_total_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TotalControl2" to="VBoxContainer/TotalControl2" method="_on_total_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TotalControl3" to="VBoxContainer/TotalControl3" method="_on_total_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/DisplayButton" to="." method="_on_display_mode_selected"]
+[connection signal="item_selected" from="VBoxContainer/ResolutionButton" to="." method="_on_resolution_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_back_pressed"]
