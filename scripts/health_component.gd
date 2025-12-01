@@ -33,9 +33,11 @@ func damage(attack_damage: float) -> void:
 		return
 	
 	health = max(health - attack_damage, 0.0)
+	damage_received.emit(attack_damage)
+	
 	if anim_player:
 		anim_player.play("HurtTint")
-	damage_received.emit(attack_damage)
+	
 	if health <= 0.0:
 		dead = true
 		died.emit()

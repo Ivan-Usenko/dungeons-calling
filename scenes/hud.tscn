@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4fup5nxvnypc"]
+
+[ext_resource type="Script" uid="uid://b31k3bcsqxi6g" path="res://hud/scripts/hud.gd" id="1_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://cblxemf148g3q" path="res://assets/ui/Hud/Hud_frame.png" id="1_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://cee32ye3ts3si" path="res://assets/ui/Hud/Hud_hp.png" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://dooqktpkueghi" path="res://assets/sprites/Items/door_key.png" id="4_6fi6k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ysmq"]
+font_size = 48
+font_color = Color(1, 1, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_5ysmq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HpBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource("1_oo0fn")
+texture_progress = ExtResource("2_5ysmq")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HpBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -23.0
+offset_right = 48.0
+offset_bottom = 15.0
+grow_vertical = 2
+text = "HP"
+label_settings = SubResource("LabelSettings_5ysmq")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ValueLable" type="Label" parent="MarginContainer/VBoxContainer/HpBar/CenterContainer"]
+layout_mode = 2
+text = "15/15"
+label_settings = SubResource("LabelSettings_5ysmq")
+
+[node name="KeyIndicator" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_6fi6k")
+stretch_mode = 4

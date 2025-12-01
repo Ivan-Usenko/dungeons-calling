@@ -20,4 +20,4 @@ func _on_body_entered(body: Node2D):
 	elif body.is_in_group("level_exit"):
 		if inventory.count("door_key"):
 			SfxManager.play_effect(owner_pos, "open_door")
-			GameManager.load_next_level()
+			GameManager.level_passed()

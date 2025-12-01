@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://busl7gcrfkm7h"]
+
+[ext_resource type="Script" uid="uid://4fsp0eahrkff" path="res://scripts/level_passed.gd" id="1_ujml2"]
+[ext_resource type="FontFile" uid="uid://byt0jhijnspnw" path="res://assets/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf" id="2_iqfj3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gh6hq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0die"]
+bg_color = Color(0.112116, 0.310804, 0.675931, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ksrq"]
+bg_color = Color(0.0364959, 0.150419, 0.359653, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hs2o"]
+bg_color = Color(0.063623, 0.210711, 0.48077, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[node name="Final" type="CanvasLayer"]
+script = ExtResource("1_ujml2")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.5
+offset_top = -140.0
+offset_right = 225.5
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("2_iqfj3")
+theme_override_font_sizes/font_size = 70
+text = "Level passed!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.0
+offset_top = 33.0
+offset_right = 417.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_iqfj3")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gh6hq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y0die")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2ksrq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3hs2o")
+text = "Exit"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_iqfj3")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gh6hq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y0die")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2ksrq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3hs2o")
+text = "Continue"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_continue_pressed"]

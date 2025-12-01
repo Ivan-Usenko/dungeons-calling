@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://b14huk30jat1f"]
+
+[ext_resource type="Script" uid="uid://cgtv5s3qbt1d5" path="res://scripts/game_finished.gd" id="1_6xxma"]
+[ext_resource type="FontFile" uid="uid://byt0jhijnspnw" path="res://assets/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf" id="2_5t2yd"]
+[ext_resource type="AudioStream" uid="uid://eg5u4lueu6sj" path="res://assets/audio/music/game_finished_music.wav" id="3_5t2yd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gh6hq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0die"]
+bg_color = Color(0.112116, 0.310804, 0.675931, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ksrq"]
+bg_color = Color(0.0364959, 0.150419, 0.359653, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hs2o"]
+bg_color = Color(0.063623, 0.210711, 0.48077, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[node name="GameFinished" type="CanvasLayer"]
+script = ExtResource("1_6xxma")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.5
+offset_top = -140.0
+offset_right = 225.5
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.819608, 0.792157, 0.466667, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("2_5t2yd")
+theme_override_font_sizes/font_size = 70
+text = "Congratulations!
+You have beat the game!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.0
+offset_top = 33.0
+offset_right = 417.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Exit" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_5t2yd")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gh6hq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y0die")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2ksrq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3hs2o")
+text = "Exit"
+
+[node name="Replay" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_5t2yd")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gh6hq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y0die")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2ksrq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3hs2o")
+text = "Replay"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5t2yd")
+autoplay = true
+bus = &"Ambience"
+
+[connection signal="pressed" from="HBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="HBoxContainer/Replay" to="." method="_on_replay_pressed"]

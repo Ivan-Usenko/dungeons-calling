@@ -6,8 +6,7 @@ const SETTINGS_SCENE = preload("res://scenes/settings.tscn")
 @onready var main_button: VBoxContainer = $MainButton
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
-
+	GameManager.start_new_game()
 
 func _on_settings_pressed() -> void:
 	name_game.visible = false

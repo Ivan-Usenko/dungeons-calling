@@ -1370,6 +1370,10 @@ collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_pf23h")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -116)
+zoom = Vector2(2, 2)
+
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("wielder") instance=ExtResource("1_4r5pv")]
@@ -1479,6 +1483,7 @@ direction_dependend = NodePath("../DirectionDependend")
 jump_velocity = 250.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("17_qfm1y")]
+max_health = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HealthComponent"]
 root_node = NodePath("../../DirectionDependend/HitboxComponent")
